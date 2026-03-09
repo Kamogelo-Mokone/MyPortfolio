@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "touch docs/.nojekyll",
     "start": "next start",
     "export": "next export",
     "deploy": "gh-pages -d out",

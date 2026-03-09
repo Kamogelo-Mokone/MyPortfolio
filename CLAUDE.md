@@ -10,7 +10,7 @@ Personal portfolio website for Kamogelo Mokone, Microsoft Power Platform / Share
 - **Language**: TypeScript
 - **Styling**: Global CSS with custom properties (no Tailwind used)
 - **Fonts**: Playfair Display (headings) + DM Sans (body) via Google Fonts — loaded in `globals.css`
-- **Images**: Next.js `<Image>` component
+- **Images**: Next.js `<Image>` component with `unoptimized: true`
 
 ---
 
@@ -50,6 +50,8 @@ public/
     Technology Expertise.pdf
 
 Assest/                  # Source assets folder (originals — not served by Next.js)
+docs/                    # Static export output — served by GitHub Pages
+  .nojekyll              # Prevents Jekyll from stripping _next/ assets (auto-created by postbuild)
 ```
 
 ---
@@ -124,6 +126,46 @@ Each card opens a detail overlay (React state, Escape/backdrop to close).
 
 ---
 
+## GitHub Pages Deployment
+
+The site is hosted at `https://kamogelo-mokone.github.io/MyPortfolio/`.
+
+### Configuration (`next.config.ts`)
+```ts
+const BASE_PATH = "/MyPortfolio";
+
+const nextConfig = {
+  output: "export",
+  distDir: "docs",
+  trailingSlash: true,
+  basePath: BASE_PATH,
+  assetPrefix: BASE_PATH + "/",
+  env: { NEXT_PUBLIC_BASE_PATH: BASE_PATH },
+  images: { unoptimized: true },
+};
+```
+
+### Key rules
+- **`basePath` + `assetPrefix`**: tells Next.js the site lives at `/MyPortfolio/` on the domain
+- **`trailingSlash: true`**: generates `cv/index.html` (not `cv.html`) — required for GitHub Pages routing
+- **`distDir: "docs"`**: GitHub Pages sources from the `/docs` folder in the repo
+- **`.nojekyll`**: prevents Jekyll from stripping the `_next/` folder (CSS/JS). Auto-created by the `postbuild` script — never delete it manually
+- **`NEXT_PUBLIC_BASE_PATH`**: exposed as a build-time env var because `next/image` with `unoptimized: true` does NOT auto-prepend `basePath` to `src` paths. All public-folder image `src` props and PDF `href` links must be prefixed manually using this variable
+
+### Image & asset path pattern
+```tsx
+// In any component that references public/ assets:
+const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
+<Image src={`${BASE}/icons/Figma.png`} ... />
+<a href={`${BASE}/documents/CV.pdf`} target="_blank">
+```
+
+### Internal navigation
+Always use Next.js `<Link href="/path">` (not `<a href="/path">`) for internal page navigation. `<Link>` auto-prepends `basePath`; plain `<a>` tags do not.
+
+---
+
 ## Conventions
 
 - **No Tailwind** — all styling is in `globals.css` using CSS custom properties
@@ -131,13 +173,23 @@ Each card opens a detail overlay (React state, Escape/backdrop to close).
 - **`"use client"`** only where needed (Nav, Work — for state/effects)
 - **Assets** → always copy to `public/` before referencing; source files stay in `Assest/`
 - **New pages** → use `Nav` + `Footer` components, `section.work` with `work-inner` for consistent layout, `btn-outline` for back navigation
-- **PDF links** → files served from `public/documents/`, opened with `target="_blank"`
+- **PDF links** → prefix with `process.env.NEXT_PUBLIC_BASE_PATH`, open with `target="_blank"`
+- **New image references** → always prefix src with `process.env.NEXT_PUBLIC_BASE_PATH`
 
 ---
 
 ## Running Locally
 
 ```bash
-npm run dev     # http://localhost:3000
-npm run build   # Production build check
+npm run dev     # http://localhost:3000/MyPortfolio
+npm run build   # Build + auto-creates docs/.nojekyll via postbuild script
 ```
+
+### Deploy to GitHub Pages
+```bash
+npm run build
+git add docs/
+git commit -m "deploy"
+git push
+```
+GitHub Pages will serve the updated `docs/` folder automatically.

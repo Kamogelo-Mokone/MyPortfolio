@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function About() {
   return (
@@ -6,7 +7,7 @@ export default function About() {
       <div className="about-inner">
         <div className="about-photo reveal">
           <Image
-            src="/ProfilePicture.png"
+            src={`${process.env.NEXT_PUBLIC_BASE_PATH}/ProfilePicture.png`}
             alt="Kamogelo Mokone"
             fill
             style={{ objectFit: "cover", objectPosition: "top center" }}
@@ -60,13 +61,13 @@ export default function About() {
           </div>
 
           <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
-            <a
+            <Link
               href="/cv"
               className="btn-primary"
               style={{ background: "var(--forest)", color: "var(--lime)" }}
             >
               Download CV
-            </a>
+            </Link>
             <a
               href="#contact"
               className="btn-outline"

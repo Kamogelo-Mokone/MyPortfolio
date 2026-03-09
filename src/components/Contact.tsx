@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Contact() {
   return (
     <section className="contact" id="contact">
@@ -32,7 +34,7 @@ export default function Contact() {
             </svg>
             github.com/Kamogelo-Mokone
           </a>
-          <a href="/cv" className="btn-primary">Download CV</a>
+          <Link href="/cv" className="btn-primary">Download CV</Link>
         </div>
       </div>
     </section>

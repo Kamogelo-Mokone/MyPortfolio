@@ -1,9 +1,11 @@
 "use client";
 
+import Link from "next/link";
+
 export default function Nav() {
   return (
     <nav>
-      <a href="#" className="nav-logo">KM.</a>
+      <Link href="/" className="nav-logo">KM.</Link>
       <ul className="nav-links">
         <li><a href="#about">About</a></li>
         <li><a href="#work">Work</a></li>

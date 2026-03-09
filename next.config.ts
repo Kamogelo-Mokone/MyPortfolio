@@ -1,10 +1,16 @@
 import type { NextConfig } from "next";
 
+const BASE_PATH = "/MyPortfolio";
+
 const nextConfig: NextConfig = {
   output: "export",
   distDir: "docs",
-  basePath: "/MyPortfolio",
-  assetPrefix: "/MyPortfolio/",
+  trailingSlash: true,
+  basePath: BASE_PATH,
+  assetPrefix: BASE_PATH + "/",
+  env: {
+    NEXT_PUBLIC_BASE_PATH: BASE_PATH,
+  },
   images: {
     unoptimized: true,
   },

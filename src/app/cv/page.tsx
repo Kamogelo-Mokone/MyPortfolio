@@ -7,26 +7,28 @@ export const metadata: Metadata = {
   title: "CV & Documents — Kamogelo Mokone",
 };
 
+const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 const documents = [
   {
     title: "Curriculum Vitae",
     subtitle: "Full professional CV",
     icon: "📄",
-    href: "/documents/CV.pdf",
+    href: `${BASE}/documents/CV.pdf`,
     accent: "var(--forest)",
   },
   {
     title: "Professional Growth",
     subtitle: "Positioning statement & growth roadmap",
     icon: "🌱",
-    href: "/documents/Professional Growth & Positioning Statement.pdf",
+    href: `${BASE}/documents/Professional Growth & Positioning Statement.pdf`,
     accent: "var(--teal)",
   },
   {
     title: "Technology Expertise",
     subtitle: "Detailed technical skills & stack overview",
     icon: "⚡",
-    href: "/documents/Technology Expertise.pdf",
+    href: `${BASE}/documents/Technology Expertise.pdf`,
     accent: "#7C5CBF",
   },
 ];

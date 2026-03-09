@@ -1,26 +1,28 @@
 import Image from "next/image";
 
+const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 const subSkills = [
   {
-    icon: "/icons/PowerApps.png",
+    icon: `${BASE}/icons/PowerApps.png`,
     name: "Power Platform",
     desc: "Canvas App architecture, PowerFX logic, UI/UX, SharePoint-backed data layers, role-based permissions, governance.",
     tags: ["Power Apps", "Power Automate", "SharePoint"],
   },
   {
-    icon: "/icons/SharePoint.png",
+    icon: `${BASE}/icons/SharePoint.png`,
     name: "SharePoint & SPFx",
     desc: "List architecture, data modeling, permission governance, Communication Sites, custom SPFx web parts in React & TypeScript.",
     tags: ["SPFx", "React", "PnPjs", "TypeScript", "+1"],
   },
   {
-    icon: "/icons/CopilotStudio.png",
+    icon: `${BASE}/icons/CopilotStudio.png`,
     name: "AI & Copilot Studio",
     desc: "Conversational agent design, multi-step scenario flows, Power Platform integration, context-aware interaction building.",
     tags: ["Copilot Studio", "MS Copilot", "Conv. AI"],
   },
   {
-    icon: "/icons/M365.png",
+    icon: `${BASE}/icons/M365.png`,
     name: "Solution Architecture",
     desc: "Stakeholder workshops, requirements translation, scalable system design, UI prototyping, technical documentation.",
     tags: ["Solution Design", "REST APIs", "Data Arch."],
@@ -39,7 +41,7 @@ export default function Skills() {
         {/* Figma featured card */}
         <div className="skill-card skill-card--featured reveal">
           <div className="skill-icon-wrap skill-icon-wrap--img">
-            <Image src="/icons/Figma.png" alt="Figma" width={28} height={28} />
+            <Image src={`${BASE}/icons/Figma.png`} alt="Figma" width={28} height={28} />
           </div>
           <div className="skill-name">Figma</div>
           <p className="skill-desc">
