@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   description: "Microsoft Power Platform, SharePoint & AI Solutions Developer based in Midrand, South Africa.",
 };
 
+
 export default function RootLayout({
   children,
 }: Readonly<{
