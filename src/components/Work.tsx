@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 
 interface Project {
   pill: string;
@@ -124,13 +125,13 @@ export default function Work() {
               <div className="section-tag">Work</div>
               <h2 className="section-title">Selected Projects</h2>
             </div>
-            <a
+            <Link
               href="/projects"
               className="btn-outline"
               style={{ borderColor: "rgba(0,88,64,0.2)", color: "var(--forest)", padding: "12px 24px", borderRadius: "980px", fontSize: "14px", textDecoration: "none" }}
             >
               All Projects →
-            </a>
+            </Link>
           </div>
 
           <div className="projects-grid projects-grid--two" style={{ marginBottom: "96px" }}>
@@ -145,13 +146,13 @@ export default function Work() {
               <div className="section-tag">Work</div>
               <h2 className="section-title">Microsoft Projects</h2>
             </div>
-            <a
+            <Link
               href="/projects"
               className="btn-outline"
               style={{ borderColor: "rgba(0,88,64,0.2)", color: "var(--forest)", padding: "12px 24px", borderRadius: "980px", fontSize: "14px", textDecoration: "none" }}
             >
               All Projects →
-            </a>
+            </Link>
           </div>
 
           <div className="projects-grid projects-grid--three">
