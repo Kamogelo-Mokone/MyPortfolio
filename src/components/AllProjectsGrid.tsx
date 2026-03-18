@@ -40,7 +40,7 @@ export default function AllProjectsGrid() {
   return (
     <>
       {/* Selected Projects */}
-      <div className="work-header reveal" style={{ marginTop: "48px" }}>
+      <div className="work-header" style={{ marginTop: "48px" }}>
         <div>
           <div className="section-tag">Selected</div>
           <h2 className="section-title">Selected Projects</h2>
@@ -54,7 +54,7 @@ export default function AllProjectsGrid() {
       </div>
 
       {/* Microsoft Projects */}
-      <div className="work-header reveal">
+      <div className="work-header">
         <div>
           <div className="section-tag">Microsoft</div>
           <h2 className="section-title">Microsoft Projects</h2>
