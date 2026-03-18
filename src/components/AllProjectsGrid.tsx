@@ -1,13 +1,16 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
 import { selectedProjects, microsoftProjects, type Project } from "@/data/projects";
+
+const sortedSelected = [...selectedProjects].sort(
+  (a, b) => b.date.localeCompare(a.date)
+);
 
 function ProjectCard({ p, onClick }: { p: Project; onClick: () => void }) {
   return (
     <div
-      className={`project-card reveal${p.featured ? " featured" : ""}${p.teal ? " teal-card" : ""}`}
+      className={`project-card${p.featured ? " featured" : ""}${p.teal ? " teal-card" : ""}`}
       onClick={onClick}
     >
       <div className="project-card-top">
@@ -21,7 +24,7 @@ function ProjectCard({ p, onClick }: { p: Project; onClick: () => void }) {
   );
 }
 
-export default function Work() {
+export default function AllProjectsGrid() {
   const [active, setActive] = useState<Project | null>(null);
 
   useEffect(() => {
@@ -36,53 +39,33 @@ export default function Work() {
 
   return (
     <>
-      <section className="work" id="work">
-        <div className="work-inner">
-
-          {/* Selected Projects */}
-          <div className="work-header reveal">
-            <div>
-              <div className="section-tag">Work</div>
-              <h2 className="section-title">Selected Projects</h2>
-            </div>
-            <Link
-              href="/projects"
-              className="btn-outline"
-              style={{ borderColor: "rgba(0,88,64,0.2)", color: "var(--forest)", padding: "12px 24px", borderRadius: "980px", fontSize: "14px", textDecoration: "none" }}
-            >
-              All Projects →
-            </Link>
-          </div>
-
-          <div className="projects-grid projects-grid--two" style={{ marginBottom: "96px" }}>
-            {selectedProjects.map((p) => (
-              <ProjectCard key={p.title} p={p} onClick={() => setActive(p)} />
-            ))}
-          </div>
-
-          {/* Microsoft Projects */}
-          <div className="work-header reveal">
-            <div>
-              <div className="section-tag">Work</div>
-              <h2 className="section-title">Microsoft Projects</h2>
-            </div>
-            <Link
-              href="/projects"
-              className="btn-outline"
-              style={{ borderColor: "rgba(0,88,64,0.2)", color: "var(--forest)", padding: "12px 24px", borderRadius: "980px", fontSize: "14px", textDecoration: "none" }}
-            >
-              All Projects →
-            </Link>
-          </div>
-
-          <div className="projects-grid projects-grid--three">
-            {microsoftProjects.map((p) => (
-              <ProjectCard key={p.title} p={p} onClick={() => setActive(p)} />
-            ))}
-          </div>
-
+      {/* Selected Projects */}
+      <div className="work-header reveal" style={{ marginTop: "48px" }}>
+        <div>
+          <div className="section-tag">Selected</div>
+          <h2 className="section-title">Selected Projects</h2>
         </div>
-      </section>
+      </div>
+
+      <div className="projects-grid projects-grid--two" style={{ marginBottom: "96px" }}>
+        {sortedSelected.map((p) => (
+          <ProjectCard key={p.title} p={p} onClick={() => setActive(p)} />
+        ))}
+      </div>
+
+      {/* Microsoft Projects */}
+      <div className="work-header reveal">
+        <div>
+          <div className="section-tag">Microsoft</div>
+          <h2 className="section-title">Microsoft Projects</h2>
+        </div>
+      </div>
+
+      <div className="projects-grid projects-grid--three">
+        {microsoftProjects.map((p) => (
+          <ProjectCard key={p.title} p={p} onClick={() => setActive(p)} />
+        ))}
+      </div>
 
       {/* Overlay */}
       <div
