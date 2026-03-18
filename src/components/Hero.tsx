@@ -36,7 +36,7 @@ export default function Hero() {
       </h1>
 
       <p className="hero-sub">
-        Microsoft Power Platform, SharePoint &amp; AI Solutions Developer — designing enterprise
+        Microsoft Power Platform, SharePoint &amp; AI Solutions Developer Designing enterprise
         systems that are scalable, human-centered, and built to last.
       </p>
 
